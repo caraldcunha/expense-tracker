@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>Expense Tracker</h1>
+            <a class="exp" href="expenses.html">
+                    <li>Add Expenses</li>
+                </a>
+            <ul>
+                <li>Dashboard</li>
+                <a href="expenses.html">
+                    <li>Add Expenses</li>
+                </a>
+                <li>Reports</li>
+                <li>Settings</li>
+            </ul>
+            <a href="login.html">
+                <h2 id="login">Log In</h2>
+            </a>
+            <div class="menu-icon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="left">
+            <div class="balance">
+                <h2>Balance Overview</h2>
+                <div class="total">
+                    <div class="income">
+                        <h3>Total Income</h3>
+                        <h2 id="income">$0</h2>
+                    </div>
+                    <div class="expenses">
+                        <h3>Total Expenses</h3>
+                        <h2 id="total-expense">$0</h2>
+                    </div>
+                    <div class="rem-balance">
+                        <h3>Remaining Balance</h3>
+                        <h2 id="reme-balance">$0</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="transactions">
+                <h2>Recent Transactions</h2>
+                <div class="transactions-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            <!-- New rows will go here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+        <section class="right">
+            <div class="spendings">
+                <h2>Spending by Category</h2>
+                <div class="all">
+                    <div class="chart-wrapper">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+
+                    <ul class="legend">
+                        <li><span class="dot food"></span>Food</li>
+                        <li><span class="dot travel"></span>Travel</li>
+                        <li><span class="dot utilities"></span>Utilities</li>
+                        <li><span class="dot entertainment"></span>Entertainment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+    </script>
+    <script src="script.js"></script>
+    <!-- <script type="module" src="expenses.js"></script> -->
+</body>
+
+
+</html>
