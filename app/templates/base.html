@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Expense Tracker{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Expense Tracker</h1>
+      <ul>
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('home') }}">Add Expenses</a></li>
+        <li><a href="{{ url_for('wrapped') }}">Wrapped</a></li>
+        <li><a href="{{ url_for('manage_categories') }}">Categories</a></li>
+      </ul>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}"><h2>Logout</h2></a>
+      {% else %}
+        <a href="{{ url_for('login') }}"><h2 id="login">Log In</h2></a>
+      {% endif %}
+      <div class="menu-icon"><i class="fa-solid fa-bars"></i></div>
+    </nav>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+</body>
+</html>
 
