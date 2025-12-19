@@ -1,1 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# Env
+.env
+venv/
+.env.*
+
+# Flask instance/db
+instance/
+*.sqlite
+
+# Node/JS cache
+node_modules/
+
+# OS
+.DS_Store
 
