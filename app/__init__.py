@@ -17,5 +17,6 @@ def create_app():
     with app.app_context():
         from . import models, routes  # Make sure these files exist
         db.create_all()
+print("✅ app/__init__.py loaded successfully")
 
     return app
