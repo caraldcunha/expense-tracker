@@ -1,11 +1,9 @@
 from app import app
 from flask import render_template, request, redirect, url_for
-from flask_login import current_user
+from flask_login import current_user, login_required
 from app.models import Transaction, Category, db
 from app.services import get_weekly_summary, check_budget_alerts
-
 from app.services.wrapped_service import get_wrapped_insights
-
 
 # ------------------ Static Pages ------------------
 
@@ -27,17 +25,10 @@ def signup():
 @login_required
 def dashboard():
     transactions = Transaction.query.filter_by(user_id=current_user.id).order_by(Transaction.date.desc()).all()
-
-    # Weekly summary and budget alerts
     summary = get_weekly_summary(current_user.id)
     category_totals = summary['category_totals']
     budget_alerts = check_budget_alerts(current_user.id, category_totals)
-
-    return render_template(
-        "dashboard.html",
-        transactions=transactions,
-        budget_alerts=budget_alerts
-    )
+    return render_template("dashboard.html", transactions=transactions, budget_alerts=budget_alerts)
 
 # ------------------ Category Management ------------------
 
@@ -67,4 +58,3 @@ def delete_category(id):
 def wrapped():
     insights = get_wrapped_insights(current_user.id)
     return render_template('wrapped.html', **insights)
-
