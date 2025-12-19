@@ -68,3 +68,4 @@ def wrapped():
     insights = get_wrapped_insights(current_user.id)
     return render_template('wrapped.html', **insights)
 
+
