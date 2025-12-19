@@ -37,8 +37,9 @@ loginSubmit?.addEventListener('click', (e) => {
   if (savedData.password === password) {
     alert('Login successful!');
     localStorage.setItem('isLoggedIn', 'true');
-    window.location.href = "Home.html";
-  } else {
+    window.location.href = "/";
+  } 
+  else {
     alert('Incorrect password.');
   }
 });
@@ -63,7 +64,7 @@ signupSubmit?.addEventListener('click', (e) => {
   localStorage.setItem(`user_${email}`, JSON.stringify(userData));
 
   alert('Account created successfully!');
-  window.location.href = "Login.html";
+  window.location.href = "/login";
   signupForm.reset();
 });
 
