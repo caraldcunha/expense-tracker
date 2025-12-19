@@ -15,7 +15,7 @@ def create_app():
     login_manager.login_view = 'login'
 
     with app.app_context():
-        from . import models, routes  # Ensure models are loaded
+        from . import models, routes  # 👈 make sure models and routes are imported
         db.create_all()
 
     return app
