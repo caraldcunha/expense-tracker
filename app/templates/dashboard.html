@@ -16,15 +16,13 @@
     <header>
         <nav>
             <h1>Expense Tracker</h1>
-            <a class="exp" href="Home.html">
+           <a class="exp" href="{{ url_for('dashboard') }}">
+
                     <li>Dashboard</li>
-            <ul>
-                <a href="Home.html">
-                    <li>Dashboard</li>
-                </a>
-                <a href="expenses.html">
-                    <li>Add Expenses</li>
-                </a>
+           <ul>
+  <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+  <li><a href="{{ url_for('home') }}">Add Expenses</a></li>
+
                 <li>Reports</li>
                 <li>Settings</li>
             </ul>
