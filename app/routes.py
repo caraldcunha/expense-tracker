@@ -24,6 +24,7 @@ def signup():
 # ------------------ Dashboard ------------------
 
 @app.route("/dashboard")
+@login_required
 def dashboard():
     transactions = Transaction.query.filter_by(user_id=current_user.id).order_by(Transaction.date.desc()).all()
 
