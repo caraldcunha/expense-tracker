@@ -61,7 +61,8 @@ def delete_category(id):
     db.session.delete(cat)
     db.session.commit()
     return redirect(url_for('manage_categories'))
-    @app.route('/wrapped')
+
+@app.route('/wrapped')
 @login_required
 def wrapped():
     insights = get_wrapped_insights(current_user.id)
