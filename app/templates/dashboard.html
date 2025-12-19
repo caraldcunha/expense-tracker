@@ -81,6 +81,17 @@
       </tr>
     </thead>
     <tbody id="transactionsBody">
+        <tbody>
+  {% for txn in transactions %}
+  <tr>
+    <td>{{ txn.date }}</td>
+    <td>{{ txn.description }}</td>
+    <td>{{ txn.category }}</td>
+    <td>${{ txn.amount }}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+
     </tbody>
   </table>
 </div>
