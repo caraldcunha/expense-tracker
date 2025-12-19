@@ -42,6 +42,7 @@ def dashboard():
 # ------------------ Category Management ------------------
 
 @app.route('/categories', methods=['GET', 'POST'])
+@login_required
 def manage_categories():
     if request.method == 'POST':
         name = request.form['category_name']
@@ -54,6 +55,7 @@ def manage_categories():
     return render_template('manage_categories.html', categories=categories)
 
 @app.route('/delete_category/<int:id>')
+@login_required
 def delete_category(id):
     cat = Category.query.get_or_404(id)
     db.session.delete(cat)
