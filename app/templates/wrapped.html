@@ -1,1 +1,102 @@
+<h1>🎉 Your Weekly Expense Wrapped 🎉</h1>
+
+<div class="wrapped-container">
+  <div class="wrapped-card active">
+    <h2>You spent ₹{{ total }} this week 💸</h2>
+  </div>
+
+  <div class="wrapped-card">
+    <h2>Your top category was <strong>{{ top_category[0] }}</strong> — ₹{{ top_category[1] }} spent!</h2>
+  </div>
+
+  <div class="wrapped-card">
+    <h2>You made {{ transaction_count }} transactions 🧾</h2>
+  </div>
+
+  {% if biggest_splurge %}
+  <div class="wrapped-card">
+    <h2>Biggest splurge: ₹{{ biggest_splurge.amount }} on "{{ biggest_splurge.description }}"</h2>
+  </div>
+  {% endif %}
+
+  <div class="wrapped-card">
+    <h2>You were most active on <strong>{{ top_day[0] }}</strong> 📅</h2>
+  </div>
+
+  <div class="wrapped-card">
+    <h2>That’s a wrap! Keep tracking and stay on budget 💪</h2>
+  </div>
+</div>
+
+<button id="nextBtn">Next ➡️</button>
+
+<p class="wrapped-footer">Tracking from {{ start.strftime('%b %d') }} to {{ end.strftime('%b %d') }}</p>
+
+<style>
+  .wrapped-container {
+    position: relative;
+    max-width: 600px;
+    margin: 2rem auto;
+  }
+
+  .wrapped-card {
+    display: none;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    padding: 2rem;
+    margin: 1rem 0;
+    border-radius: 20px;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  .wrapped-card.active {
+    display: block;
+  }
+
+  #nextBtn {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  #nextBtn:hover {
+    background-color: #555;
+  }
+
+  .wrapped-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+    color: #666;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll('.wrapped-card');
+  const nextBtn = document.getElementById('nextBtn');
+  let current = 0;
+
+  nextBtn.addEventListener('click', () => {
+    cards[current].classList.remove('active');
+    current++;
+    if (current < cards.length) {
+      cards[current].classList.add('active');
+    } else {
+      nextBtn.style.display = 'none';
+    }
+  });
+</script>
 
