@@ -15,3 +15,4 @@ login_manager.init_app(app)
 from app import routes, models
 # Expose app and db for external imports
 __all__ = ['app', 'db']
+db = db
