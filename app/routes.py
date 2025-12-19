@@ -4,6 +4,9 @@ from flask_login import current_user
 from app.models import Transaction, Category, db
 from app.services import get_weekly_summary, check_budget_alerts
 
+from app.services.wrapped_service import get_wrapped_insights
+
+
 # ------------------ Static Pages ------------------
 
 @app.route("/")
