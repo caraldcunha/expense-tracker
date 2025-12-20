@@ -23,6 +23,19 @@
 
   <div class="transactions">
     <h2>Recent Transactions</h2>
+    <div class="transactions">
+  <h2>Transactions</h2>
+
+  <div class="actions-bar">
+    <form action="{{ url_for('undo') }}" method="get">
+      <button type="submit" class="undo-btn">Undo last action</button>
+    </form>
+    <!-- If you have "Add Transaction" or filters, place them here too -->
+  </div>
+
+  <!-- existing transactions-table-wrapper + table -->
+</div>
+
     <table>
       <thead>
         <tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Actions</th></tr>
