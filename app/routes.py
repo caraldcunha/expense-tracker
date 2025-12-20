@@ -93,17 +93,19 @@ def delete_category(id):
     return redirect(url_for('manage_categories'))
 
 # ------------------ Wrapped ------------------
-
 @app.route('/wrapped')
 @login_required
 def wrapped():
     insights = get_wrapped_insights(current_user.id)  # uses heap
     return render_template('wrapped.html', **insights)
-    # ------------------ Edit Transaction ------------------
+
+# ------------------ Edit Transaction ------------------
 
 @app.route('/edit_transaction/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_transaction(id):
+    ...
+
     txn = Transaction.query.get_or_404(id)
 
     if txn.user_id != current_user.id:
