@@ -111,12 +111,24 @@ def edit_transaction(id):
         return redirect(url_for('dashboard'))
 
     if request.method == 'POST':
+        # Save previous state before editing
+        previous_data = {
+            'id': txn.id,
+            'date': txn.date,
+            'description': txn.description,
+            'amount': txn.amount,
+            'category_id': txn.category_id,
+            'user_id': txn.user_id
+        }
+        undo_stack.push_action("edit", previous_data)
+
+        # Apply new changes
         txn.date = request.form['date']
         txn.description = request.form['description']
         txn.amount = float(request.form['amount'])
         txn.category_id = int(request.form['category'])
         db.session.commit()
-        flash("Transaction updated successfully!", "success")
+        flash("Transaction updated successfully! You can undo this.", "success")
         return redirect(url_for('dashboard'))
 
     categories = Category.query.filter_by(user_id=current_user.id).all()
@@ -169,7 +181,20 @@ def undo():
         db.session.commit()
         flash("Undo successful. Transaction restored.", "success")
 
+    elif action_type == "edit":
+        txn = Transaction.query.get(data['id'])
+        if txn and txn.user_id == current_user.id:
+            txn.date = data['date']
+            txn.description = data['description']
+            txn.amount = data['amount']
+            txn.category_id = data['category_id']
+            db.session.commit()
+            flash("Undo successful. Transaction reverted to previous state.", "success")
+        else:
+            flash("Unable to undo edit. Transaction not found or unauthorized.", "error")
+
     return redirect(url_for('dashboard'))
+
 
 
 
