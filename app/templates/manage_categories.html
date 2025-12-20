@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Manage Categories{% endblock %}
+{% block content %}
+<main class="category-page">
+  <div class="main-container">
+    <h1>Manage Categories</h1>
+
+    <form method="POST" class="category-form">
+      <input type="text" name="category_name" placeholder="New category name" required>
+      <button type="submit">Add Category</button>
+    </form>
+
+    <div class="category-list">
+      <h2>Your Categories</h2>
+      <ul>
+        {% for category in categories %}
+          <li>
+            {{ category.name }}
+            <a href="{{ url_for('delete_category', id=category.id) }}" class="delete-btn">Delete</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</main>
+
+<style>
+  .category-page {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+
+  .category-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-form input {
+    flex: 1;
+    padding: 0.5rem;
+  }
+
+  .category-form button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .category-list ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .category-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .delete-btn {
+    color: red;
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
