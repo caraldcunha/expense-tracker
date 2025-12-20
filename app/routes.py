@@ -98,3 +98,26 @@ def delete_category(id):
 def wrapped():
     insights = get_wrapped_insights(current_user.id)  # uses heap
     return render_template('wrapped.html', **insights)
+    # ------------------ Edit Transaction ------------------
+
+@app.route('/edit_transaction/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_transaction(id):
+    txn = Transaction.query.get_or_404(id)
+
+    if txn.user_id != current_user.id:
+        flash("You are not authorized to edit this transaction.", "error")
+        return redirect(url_for('dashboard'))
+
+    if request.method == 'POST':
+        txn.date = request.form['date']
+        txn.description = request.form['description']
+        txn.amount = float(request.form['amount'])
+        txn.category_id = int(request.form['category'])
+        db.session.commit()
+        flash("Transaction updated successfully!", "success")
+        return redirect(url_for('dashboard'))
+
+    categories = Category.query.filter_by(user_id=current_user.id).all()
+    return render_template('edit_transaction.html', txn=txn, categories=categories)
+
