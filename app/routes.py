@@ -2,7 +2,8 @@ from app import app, db
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from app.dsa.stack import UndoStack  
+undo_stack = UndoStack() 
 from app.models import Transaction, Category, User
 from app.services.wrapped_service import get_wrapped_insights, get_weekly_summary
 from app.services.budget_service import check_budget_alerts
@@ -120,4 +121,29 @@ def edit_transaction(id):
 
     categories = Category.query.filter_by(user_id=current_user.id).all()
     return render_template('edit_transaction.html', txn=txn, categories=categories)
+    # ------------------ Delete Transaction ------------------
+
+@app.route('/delete_transaction/<int:id>')
+@login_required
+def delete_transaction(id):
+    txn = Transaction.query.get_or_404(id)
+    if txn.user_id != current_user.id:
+        flash("Unauthorized", "error")
+        return redirect(url_for('dashboard'))
+
+    # Save transaction data before deleting
+    undo_stack.push_action("delete", {
+        'id': txn.id,
+        'date': txn.date,
+        'description': txn.description,
+        'amount': txn.amount,
+        'category_id': txn.category_id,
+        'user_id': txn.user_id
+    })
+
+    db.session.delete(txn)
+    db.session.commit()
+    flash("Transaction deleted. You can undo this.", "info")
+    return redirect(url_for('dashboard'))
+
 
