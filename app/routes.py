@@ -145,5 +145,31 @@ def delete_transaction(id):
     db.session.commit()
     flash("Transaction deleted. You can undo this.", "info")
     return redirect(url_for('dashboard'))
+    # ------------------ Undo Last Action ------------------
+
+@app.route('/undo')
+@login_required
+def undo():
+    if undo_stack.is_empty():
+        flash("Nothing to undo.", "warning")
+        return redirect(url_for('dashboard'))
+
+    action_type, data = undo_stack.pop_action()
+
+    if action_type == "delete":
+        restored = Transaction(
+            id=data['id'],
+            date=data['date'],
+            description=data['description'],
+            amount=data['amount'],
+            category_id=data['category_id'],
+            user_id=data['user_id']
+        )
+        db.session.add(restored)
+        db.session.commit()
+        flash("Undo successful. Transaction restored.", "success")
+
+    return redirect(url_for('dashboard'))
+
 
 
