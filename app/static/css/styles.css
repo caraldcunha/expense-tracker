@@ -99,6 +99,30 @@ main {
 
 .transactions { margin-top: 15px; }
 .transactions h2 { margin-bottom: 12px; font-size: xx-large; }
+/* Undo button + actions bar */
+.actions-bar {
+    display: flex;
+    justify-content: flex-end; /* moves actions to the right */
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.undo-btn {
+    background-color: #f39c12;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.undo-btn:hover {
+    background-color: #e67e22;
+}
+
+
+
 
 table {
     width: 100%;
